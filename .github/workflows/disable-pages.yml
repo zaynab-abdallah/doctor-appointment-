@@ -1,0 +1,3 @@
+# This workflow is intentionally empty to disable GitHub Pages builds
+# Next.js App Router requires a Node.js server and cannot be deployed as static files on GitHub Pages
+# Please use Vercel for deployment instead
