@@ -42,8 +42,8 @@ import {
               </div>
   
               {/* Sign up */}
-              <div className="col-span-2 lg:col-span-3 lg:flex lg:items-end">
-                <form className=" flex  gap-2">
+              <div className="col-span-2 lg:col-span-3 lg:flex lg:items-end  ">
+                <form className=" flex flex-col  gap-2 ">
                   <div className="border border-gray-200 p- sm:flex sm:gap-4">
                     <input
                       type="email"

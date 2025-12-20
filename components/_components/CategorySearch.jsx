@@ -34,7 +34,7 @@ function CategorySearch() {
         <p className="text-gray-500 mb-6 text-center max-w-lg">
           Find doctors by specialty or name easily
         </p>
-        <div className="flex gap-10">
+        <div className="flex flex-col gap-10">
         <div className="flex w-70 max-w-md">
           <Input
             placeholder="Search by doctor name or specialty"
