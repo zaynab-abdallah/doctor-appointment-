@@ -1,9 +1,19 @@
+"use client";
+
 import React from "react";
 import { Button } from "./button"
+import { useRouter } from "next/navigation";
+
 function Hero() {
+    const router = useRouter();
+    
+    const handleExploreClick = () => {
+        router.push("/explore");
+    };
+    
     return (
         <section>
-            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 mb-20">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
                     <div>
                         <div className="max-w-prose md:max-w-none">
@@ -17,7 +27,7 @@ function Hero() {
                                 search, compare, and book appointment with top doctors anytime,
                                 anywhere. access quality health care from the comfort your home.
                             </p>
-                            <Button>Explor New</Button>
+                            <Button onClick={handleExploreClick}>Explore Now</Button>
                         </div>
                     </div>
 
