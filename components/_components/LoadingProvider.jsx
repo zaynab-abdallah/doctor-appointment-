@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Loading from "./Loading";
 
-export default function LoadingProvider({ children }) {
+function LoadingProviderContent({ children }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
@@ -28,12 +28,20 @@ export default function LoadingProvider({ children }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [pathname, searchParams]);
+  }, [pathname, searchParams?.toString()]);
 
   return (
     <>
       {loading && <Loading />}
       {children}
     </>
+  );
+}
+
+export default function LoadingProvider({ children }) {
+  return (
+    <Suspense fallback={<Loading />}>
+      <LoadingProviderContent>{children}</LoadingProviderContent>
+    </Suspense>
   );
 }
