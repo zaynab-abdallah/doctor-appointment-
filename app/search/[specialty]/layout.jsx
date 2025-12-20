@@ -16,14 +16,14 @@ export default function SearchLayout({ children }) {
   };
 
   return (
-    <div className="flex min-h-screen relative">
+    <div className="flex min-h-screen relative ">
       <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
       
       <main className="flex-1 p-6 w-full lg:ml-0">
         {/* Hamburger Menu Button - Mobile Only */}
         <button
           onClick={toggleSidebar}
-          className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-lime-600 text-white rounded-lg shadow-lg hover:bg-lime-700 transition-all"
+          className="lg:hidden    left-4 z-50 p-2 bg-lime-600 text-white rounded-lg shadow-lg hover:bg-lime-700 transition-all"
           aria-label="Toggle menu"
         >
           {isSidebarOpen ? (

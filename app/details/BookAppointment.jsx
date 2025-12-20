@@ -117,61 +117,90 @@ return day<new Date()
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-full bg-lime-600 hover:bg-lime-700 text-white py-6 text-lg mb-6">
+        <Button className="w-full bg-lime-600 hover:bg-lime-700 text-white py-4 sm:py-6 text-base sm:text-lg mb-6">
           Book Appointment
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-[90vw] md:max-w-[700px]">
-        <DialogHeader>
-          <DialogTitle>Book Appointment</DialogTitle>
-          <DialogDescription>
-            Select date and time
+      <DialogContent className="w-[95vw] max-w-[95vw] sm:max-w-[600px] md:max-w-[800px] mx-auto p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
+        <DialogHeader className="mb-4">
+          <DialogTitle className="text-xl sm:text-2xl font-bold">Book Appointment</DialogTitle>
+          <DialogDescription className="text-sm sm:text-base mt-2">
+            Select date and time for your appointment
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="mt-4">
-  <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-6">
+        <form onSubmit={handleSubmit} className="mt-4 sm:mt-6">
+          {/* Layout */}
+          <div className="flex flex-col md:flex-row gap-4 sm:gap-6">
+            {/* Calendar */}
+            <div className="w-full md:w-[55%] flex justify-center items-start">
+              <div className="w-full max-w-[280px] sm:max-w-sm">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  disabled={(day) => day < new Date()}
+                  className="rounded-lg border w-full"
+                />
+              </div>
+            </div>
 
-    <Calendar
-      mode="single"
-      selected={date}
-      onSelect={setDate}
-      disabled={(day) => day < new Date()}
-      className="rounded-lg border"
-    />
+            {/* Time Slots */}
+            <div className="w-full md:w-[45%]">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-700 mb-3">
+                Select Time
+              </h3>
+              
+              {!date && (
+                <p className="text-xs sm:text-sm text-gray-500 mb-4 p-2 bg-gray-50 rounded">
+                  Please select a date first
+                </p>
+              )}
 
-    <div className="grid grid-cols-3 gap-3">
-      {timeSlot.map((time) => (
-        <Button
-          key={time.time}
-          type="button"
-          disabled={!date}
-          onClick={() => setSelectedTime(time.time)}
-          className={`text-sm
-            ${selectedTime === time.time
-              ? "bg-lime-600 text-white"
-              : "hover:bg-lime-600 hover:text-white"}
-          `}
-        >
-          {time.time}
-        </Button>
-      ))}
-    </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 max-h-[300px] sm:max-h-none overflow-y-auto">
+                {timeSlot.map((time) => (
+                  <Button
+                    key={time.time}
+                    type="button"
+                    disabled={!date}
+                    onClick={() => setSelectedTime(time.time)}
+                    className={`text-xs sm:text-sm py-2 sm:py-3 px-2 sm:px-4 transition-all ${
+                      selectedTime === time.time
+                        ? "bg-lime-600 text-white shadow-md scale-105"
+                        : "border border-gray-300 bg-white text-gray-700 hover:bg-lime-600 hover:text-white hover:border-lime-600"
+                    } disabled:opacity-50 disabled:cursor-not-allowed`}
+                  >
+                    {time.time}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
 
-  </div>
+          {/* Selected Info */}
+          {date && selectedTime && (
+            <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-lime-50 border border-lime-200 rounded-lg">
+              <p className="text-sm sm:text-base text-gray-700">
+                <span className="font-semibold">Selected:</span> {date.toLocaleDateString('en-US', { 
+                  weekday: 'long', 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric' 
+                })} at {selectedTime}
+              </p>
+            </div>
+          )}
 
-  <Button
-    type="submit"
-    disabled={loading || !(date && selectedTime)}
-    className="w-full bg-lime-600 hover:bg-lime-700 text-white py-5 text-lg mt-6"
-  >
-    {loading ? "Booking..." : "Book Appointment"}
-  </Button>
-</form>
-
-
-       
+          {/* Submit */}
+          <Button
+            type="submit"
+            disabled={loading || !(date && selectedTime)}
+            className="w-full bg-lime-600 hover:bg-lime-700 text-white py-4 sm:py-5 text-base sm:text-lg mt-4 sm:mt-6 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          >
+            {loading ? "Booking..." : "Book Appointment"}
+          </Button>
+        </form>
       </DialogContent>
     </Dialog>
   )

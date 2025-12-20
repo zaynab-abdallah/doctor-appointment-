@@ -41,9 +41,10 @@ export default function DoctorDetailsPage() {
         <div className="lg:col-span-2">
           <h1 className="text-3xl font-bold mb-6">Details</h1>
 
-          <div className="flex gap-10 bg-white rounded-xl shadow-xl p-6">
+          <div className="flex flex-col sm:flex-row gap-10 bg-white rounded-xl shadow-xl p-6 items-center justify-center">
+
             {/* Doctor Image */}
-            <div className="mb-6">
+            <div className="mb-6 flex  ">
               <img
                 src={doctor.image}
                 alt={doctor.doctor_name}
