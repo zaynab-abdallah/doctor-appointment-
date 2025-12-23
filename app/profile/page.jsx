@@ -1,12 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+
 
 export default function ProfilePage() {
   const { user } = useKindeBrowserClient();
-  const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const firstLetter =
+    user?.given_name?.[0] ||
+    user?.family_name?.[0] ||
+    user?.email?.[0] ||
+    "U";
 
+  // لو الصورة اتغيرت نرجّع الـ fallback
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [user?.picture]);
   if (!user) {
     return (
       <div className="container mx-auto px-4 py-8 mb-20 flex flex-col items-center">
@@ -17,41 +29,34 @@ export default function ProfilePage() {
     );
   }
 
-  // Get first letter for avatar fallback
-  const firstLetter = (
-    user?.given_name?.[0] ||
-    user?.family_name?.[0] ||
-    user?.email?.[0] ||
-    "U"
-  ).toUpperCase();
-
   return (
     <div className="container mx-auto px-4 py-8 mb-20 flex flex-col items-center">
       <h1 className="text-3xl font-bold mb-8">My Profile</h1>
 
-      <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl w-full">
+      <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl ">
         {/* Profile Picture/Avatar */}
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-lime-600 mb-4 flex items-center justify-center relative">
-            {user.picture && !imageError ? (
-              <img
-                src={user.picture}
-                alt={user.given_name || user.email || "User"}
-                className="w-full h-full object-cover"
-                onError={() => setImageError(true)}
-              />
-            ) : (
-              <div className="w-full h-full bg-lime-400 flex items-center justify-center text-white font-bold text-4xl">
-                {firstLetter}
-              </div>
-            )}
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900">
-            {user.given_name && user.family_name
-              ? `${user.given_name} ${user.family_name}`
-              : user.given_name || user.email || "User"}
-          </h2>
-        </div>
+        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-lime-600 mb-4 flex items-center justify-center bg-lime-400">
+      {/* Fallback */}
+      {!imageLoaded && (
+        <span className="text-white font-bold text-4xl">
+          {firstLetter.toUpperCase()}
+        </span>
+      )}
+
+      {/* Image */}
+      {user?.picture && (
+        <img
+          src={user.picture}
+          alt="User"
+          className={`w-full h-full object-cover absolute ${
+            imageLoaded ? "block" : "hidden"
+          }`}
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageLoaded(false)}
+        />
+      )}
+    </div>
+
 
         {/* Profile Information */}
         <div className="space-y-4">

@@ -13,14 +13,14 @@ function DoctorCard({ doctor }) {
 
   return (
     <div 
-      className="border rounded-xl p-5 shadow-sm hover:shadow-md transition w-70 mb-5 cursor-pointer"
+      className="border rounded-xl p-5 shadow-sm hover:shadow-md transition w-full max-w-sm mb-5 cursor-pointer"
       onClick={handleCardClick}
     >
       {/* Image */}
       <img
         src={doctor.image}
         alt={doctor.doctor_name}
-        className="w-60 h-60 object-cover rounded-lg mb-4"
+        className="w-full h-60 object-cover rounded-lg mb-4"
       />
 
       {/* Specialty */}
@@ -29,22 +29,22 @@ function DoctorCard({ doctor }) {
       </span>
 
       {/* Info */}
-      <p className="text-sm mb-1 w-55">
-        <span className="font-semibold  text-lime-700">Name:</span> {doctor.doctor_name}
+      <p className="text-sm mb-1">
+        <span className="font-semibold text-lime-700">Name:</span> {doctor.doctor_name}
       </p>
 
-      <p className="text-sm mb-1 w-55">
-        <span className="font-semibold  text-lime-700">Address:</span> {doctor.address}
+      <p className="text-sm mb-1">
+        <span className="font-semibold text-lime-700">Address:</span> {doctor.address}
       </p>
 
-      <p className="text-sm mb-4 w-55">
-        <span className="font-bold  text-lime-700">Phone:</span> {doctor.phone}
+      <p className="text-sm mb-4">
+        <span className="font-bold text-lime-700">Phone:</span> {doctor.phone}
       </p>
 
       {/* Button */}
       <Button 
         variant="outline" 
-        className="w-55 bg-lime-600  hover:bg-lime-700  cursor-pointer hover:scale-105 transition-all text-white"
+        className="w-full bg-lime-600 hover:bg-lime-700 cursor-pointer hover:scale-105 transition-all text-white"
         onClick={(e) => {
           e.stopPropagation();
           router.push(`/details/${doctor.id}`);
