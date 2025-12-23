@@ -35,20 +35,20 @@ export default function DoctorDetailsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 mb-20">
+    <div className="container mx-auto px-4  mb-20">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Content - Doctor Details */}
         <div className="lg:col-span-2">
           <h1 className="text-3xl font-bold mb-6">Details</h1>
 
-          <div className="flex flex-col sm:flex-row gap-10 bg-white rounded-xl shadow-xl p-6 items-center justify-center">
+          <div className="flex flex-col   bg-white rounded-xl shadow-xl p-6 items-center justify-center">
 
             {/* Doctor Image */}
             <div className="mb-6 flex  ">
               <img
                 src={doctor.image}
                 alt={doctor.doctor_name}
-                className="w-full aspect-[4/3] object-cover rounded-lg"
+                className="w-full  object-cover rounded-lg"
               />
 
             </div>
