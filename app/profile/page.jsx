@@ -5,22 +5,12 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Image from "next/image";
 
 export default function ProfilePage() {
-  const { user, isLoading } = useKindeBrowserClient();
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center p-6 bg-white rounded shadow">
-          Loading...
-        </div>
-      </div>
-    );
-  }
+  const { user } = useKindeBrowserClient();
 
   if (!user) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center p-6 bg-white rounded shadow">
+      <div className="container mx-auto px-4 py-8 mb-20 flex flex-col items-center">
+        <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl w-full text-center">
           <h2 className="text-2xl font-bold mb-4">Please log in to view your profile</h2>
         </div>
       </div>
@@ -34,7 +24,7 @@ export default function ProfilePage() {
       <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl w-full">
         {/* Profile Picture/Avatar */}
         <div className="flex flex-col items-center mb-8">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-lime-600 mb-4">
+          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-lime-600 mb-4 flex items-center justify-center">
             {user.picture ? (
               <img
                 src={user.picture}
