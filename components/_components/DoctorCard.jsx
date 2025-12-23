@@ -20,7 +20,7 @@ function DoctorCard({ doctor }) {
       <img
         src={doctor.image}
         alt={doctor.doctor_name}
-        className="w-55 h-52 object-cover rounded-lg mb-4"
+        className="w-90 h-100 object-cover rounded-lg mb-4"
       />
 
       {/* Specialty */}
