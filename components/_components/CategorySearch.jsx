@@ -80,7 +80,7 @@ function CategorySearch() {
 
 
       {/* Doctors */}
-      <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredDoctors.length > 0 ? (
           filteredDoctors.map((doctor) => (
             <DoctorCard key={doctor.id} doctor={doctor} />
