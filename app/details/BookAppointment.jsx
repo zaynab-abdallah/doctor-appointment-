@@ -20,7 +20,6 @@ function BookAppointment({ doctorId }) {
   const [timeSlot, setTimeSlot] = useState([])
   const [selectedTime, setSelectedTime] = useState(null)
   const { toast } = useToast()
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getTime()
@@ -60,8 +59,6 @@ return day<new Date()
       })
       return
     }
-  
-    setLoading(true)
   
     try {
       const res = await fetch("/api/book-appointment", {
@@ -107,8 +104,6 @@ return day<new Date()
         description: "Something went wrong, please try again",
         variant: "destructive",
       })
-    } finally {
-      setLoading(false)
     }
   }
   
@@ -195,10 +190,10 @@ return day<new Date()
           {/* Submit */}
           <Button
             type="submit"
-            disabled={loading || !(date && selectedTime)}
+            disabled={!(date && selectedTime)}
             className="w-full bg-lime-600 hover:bg-lime-700 text-white py-4 sm:py-5 text-base sm:text-lg mt-4 sm:mt-6 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
-            {loading ? "Booking..." : "Book Appointment"}
+            Book Appointment
           </Button>
         </form>
       </DialogContent>

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import doctors from "@/data/doctors.json";
 
 export default function MyBookingPage() {
-  const { user, isLoading } = useKindeBrowserClient();
+  const { user } = useKindeBrowserClient();
   const router = useRouter();
   const [appointments, setAppointments] = useState([]);
   const [filter, setFilter] = useState("upcoming"); // "upcoming" or "past"
@@ -34,16 +34,6 @@ export default function MyBookingPage() {
       return appointmentDate < now;
     }
   });
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center p-6 bg-white rounded shadow">
-          Loading...
-        </div>
-      </div>
-    );
-  }
   
   if (!user) {
     return (

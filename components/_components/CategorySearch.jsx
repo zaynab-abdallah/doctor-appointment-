@@ -15,14 +15,11 @@ function CategorySearch() {
   const [search, setSearch] = useState("");
   const router = useRouter();
 
-  // Show all doctors if search is empty, otherwise filter by search
-  const filteredDoctors = search.trim() === "" 
-    ? doctors 
-    : doctors.filter(
-        (doc) =>
-          doc.specialty.toLowerCase().includes(search.toLowerCase()) ||
-          doc.doctor_name.toLowerCase().includes(search.toLowerCase())
-      );
+  const filteredDoctors = doctors.filter(
+    (doc) =>
+      doc.specialty.toLowerCase().includes(search.toLowerCase()) ||
+      doc.doctor_name.toLowerCase().includes(search.toLowerCase())
+  );
 
 
   return (
@@ -75,7 +72,7 @@ function CategorySearch() {
 
 
       {/* Doctors */}
-      <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredDoctors.length > 0 ? (
           filteredDoctors.map((doctor) => (
             <DoctorCard key={doctor.id} doctor={doctor} />
