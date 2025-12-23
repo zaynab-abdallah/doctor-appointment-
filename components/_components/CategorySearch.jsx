@@ -13,14 +13,12 @@ import { useRouter } from "next/navigation";
 
 function CategorySearch() {
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
   const router = useRouter();
 
   const filteredDoctors = doctors.filter(
     (doc) =>
-      (selectedCategory === "All" || doc.specialty === selectedCategory) &&
-      (doc.specialty.toLowerCase().includes(search.toLowerCase()) ||
-        doc.doctor_name.toLowerCase().includes(search.toLowerCase()))
+      doc.specialty.toLowerCase().includes(search.toLowerCase()) ||
+      doc.doctor_name.toLowerCase().includes(search.toLowerCase())
   );
 
 
@@ -56,16 +54,10 @@ function CategorySearch() {
         {categories.map((cat) => (
           <button
             key={cat.id}
-            className={`flex flex-col items-center justify-center rounded-xl w-24 h-24 transition-all duration-200 ${
-              selectedCategory === cat.name
-                ? "bg-lime-600 text-white shadow-lg scale-105"
-                : "bg-lime-200 hover:bg-lime-300"
-            }`}
+            className="flex flex-col items-center justify-center rounded-xl w-24 h-24 transition-all duration-200 bg-lime-200 hover:bg-lime-300 hover:scale-105"
             onClick={() => {
-              setSelectedCategory(cat.name);
               router.push(`/search/${encodeURIComponent(cat.name)}`);
             }}
-
           >
             <img src={cat.icon} alt={cat.name} className="w-14 h-14 mb-1 object-contain" />
             <span className="text-xs font-medium text-center">

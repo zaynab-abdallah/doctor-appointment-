@@ -13,14 +13,14 @@ function DoctorCard({ doctor }) {
 
   return (
     <div 
-      className="border rounded-xl p-5 shadow-sm hover:shadow-md transition w-70 mb-5  cursor-pointer"
+      className="border rounded-xl p-5 shadow-sm hover:shadow-md transition w-70 mb-5 cursor-pointer"
       onClick={handleCardClick}
     >
       {/* Image */}
       <img
         src={doctor.image}
         alt={doctor.doctor_name}
-        className="w-60 h-60  rounded-lg mb-4"
+        className="w-60 h-60 object-cover rounded-lg mb-4"
       />
 
       {/* Specialty */}
