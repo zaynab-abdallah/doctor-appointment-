@@ -13,7 +13,7 @@ function DoctorCard({ doctor }) {
 
   return (
     <div 
-      className="border rounded-xl p-5 shadow-sm hover:shadow-md transition w-70  cursor-pointer"
+      className="border rounded-xl p-5 shadow-sm hover:shadow-md transition w-70 mb-5  cursor-pointer"
       onClick={handleCardClick}
     >
       {/* Image */}
