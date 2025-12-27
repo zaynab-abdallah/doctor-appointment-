@@ -13,7 +13,7 @@ function DoctorCard({ doctor }) {
 
   return (
     <div 
-      className="border-2 border-gray-100 rounded-2xl p-2 shadow-md hover:shadow-2xl transition-all duration-300 w-full max-w-sm mb-5 cursor-pointer bg-white hover:border-lime-300 group overflow-hidden"
+      className="border-2 border-gray-100 rounded-2xl p-4 shadow-md hover:shadow-2xl transition-all duration-300 w-full max-w-sm mb-5 cursor-pointer bg-white hover:border-lime-300 group overflow-hidden"
       onClick={handleCardClick}
     >
       {/* Image with overlay effect */}

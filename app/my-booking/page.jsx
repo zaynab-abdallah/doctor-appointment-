@@ -5,6 +5,14 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import doctors from "@/data/doctors.json";
 
 export default function MyBookingPage() {
@@ -13,6 +21,8 @@ export default function MyBookingPage() {
   const { toast } = useToast();
   const [appointments, setAppointments] = useState([]);
   const [filter, setFilter] = useState("upcoming"); // "upcoming" or "past"
+  const [appointmentToDelete, setAppointmentToDelete] = useState(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -50,13 +60,19 @@ export default function MyBookingPage() {
   }
   
 
-  const handleCancelAppointment = (appointmentId) => {
-    // Find the appointment to get details for the message
-    const appointmentToDelete = appointments.find((apt) => apt.id === appointmentId);
-    const doctor = appointmentToDelete ? doctors.find((doc) => doc.id === appointmentToDelete.doctorId) : null;
+  const handleCancelClick = (appointmentId) => {
+    const appointment = appointments.find((apt) => apt.id === appointmentId);
+    setAppointmentToDelete(appointment);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (!appointmentToDelete) return;
+    
+    const doctor = doctors.find((doc) => doc.id === appointmentToDelete.doctorId);
     
     // Remove the appointment
-    const updatedAppointments = appointments.filter((apt) => apt.id !== appointmentId);
+    const updatedAppointments = appointments.filter((apt) => apt.id !== appointmentToDelete.id);
     setAppointments(updatedAppointments);
     localStorage.setItem(`appointments_${user.id}`, JSON.stringify(updatedAppointments));
     
@@ -68,6 +84,15 @@ export default function MyBookingPage() {
         : "This appointment choice was wiped out.",
       duration: 3000,
     });
+    
+    // Close dialog and reset
+    setIsDeleteDialogOpen(false);
+    setAppointmentToDelete(null);
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteDialogOpen(false);
+    setAppointmentToDelete(null);
   };
 
   return (
@@ -177,7 +202,7 @@ export default function MyBookingPage() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        handleCancelAppointment(appointment.id);
+                        handleCancelClick(appointment.id);
                       }}
                       variant="outline"
                       className="w-full mt-4 border-red-300 text-red-600 hover:bg-red-50"
@@ -191,6 +216,60 @@ export default function MyBookingPage() {
           })}
         </div>
       )}
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-gray-900">
+              Confirm Deletion
+            </DialogTitle>
+            <DialogDescription className="text-base mt-2">
+              {appointmentToDelete && (() => {
+                const doctor = doctors.find((doc) => doc.id === appointmentToDelete.doctorId);
+                return doctor 
+                  ? `Are you sure you want to cancel your appointment with ${doctor.doctor_name}?`
+                  : "Are you sure you want to cancel this appointment?";
+              })()}
+            </DialogDescription>
+          </DialogHeader>
+          {appointmentToDelete && (
+            <div className="py-4">
+              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                <p className="text-sm text-gray-600">
+                  <span className="font-semibold">Date:</span>{" "}
+                  {new Date(appointmentToDelete.date).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+                <p className="text-sm text-gray-600">
+                  <span className="font-semibold">Time:</span> {appointmentToDelete.time}
+                </p>
+              </div>
+            </div>
+          )}
+          <DialogFooter className="flex gap-3 sm:gap-0">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleCancelDelete}
+              className="flex-1 sm:flex-initial"
+            >
+              No, Keep It
+            </Button>
+            <Button
+              type="button"
+              onClick={handleConfirmDelete}
+              className="bg-red-600 hover:bg-red-700 text-white flex-1 sm:flex-initial"
+            >
+              Yes, Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

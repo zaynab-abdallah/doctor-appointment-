@@ -25,12 +25,12 @@ function CategorySearch() {
   return (
     <div id="search-section" className="mb-20 relative">
       {/* Background decoration */}
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-64 bg-gradient-to-b from-lime-50 to-transparent -z-10"></div>
+      <div className="absolute rounded-xl top-0 left-1/2 transform -translate-x-1/2 w-full h-64 bg-gradient-to-b from-lime-50 to-transparent -z-10"></div>
       
       {/* Title + Search */}
-      <div className="flex flex-col items-center mb-16 relative z-10">
+      <div className="flex flex-col items-center mb-16   relative z-10">
         <div className="text-center space-y-4 mb-10">
-          <h2 className="font-bold text-4xl md:text-5xl mb-2">
+          <h2 className="font-bold text-4xl md:text-5xl mb-2 p-4">
             <span className="bg-gradient-to-r from-lime-600 to-lime-800 bg-clip-text text-transparent">Search</span>{" "}
             <span className="text-gray-900">Category</span>
           </h2>
