@@ -136,7 +136,7 @@ export default function DoctorDetailsPage() {
             <div className="sticky top-8">
               <div className="mb-6">
                 <h2 className="text-2xl font-bold mb-2 text-gray-900">Similar Doctors</h2>
-                <div className="h-1 w-16 bg-gradient-to-r from-lime-500 to-lime-700 rounded-full"></div>
+                
               </div>
               <div className="space-y-4 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
                 {suggestions.map((suggestedDoctor) => (
