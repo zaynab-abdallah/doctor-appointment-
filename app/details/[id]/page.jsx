@@ -45,12 +45,13 @@ export default function DoctorDetailsPage() {
               <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-lime-600 to-lime-800 bg-clip-text text-transparent">
                 Doctor Details
               </h1>
-              <div className="h-1 w-20 bg-gradient-to-r from-lime-500 to-lime-700 rounded-full"></div>
+
             </div>
 
-          <div className="flex gap-8 p-8">
+            <div className="bg-white/1 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-lime-100">
+              <div className="flex flex-col sm:flex-col lg:flex-row gap-8 p-6 sm:p-8">
                 {/* Doctor Image */}
-                <div className="flex-shrink-0 sm:w-80">
+                <div className="flex-shrink-0 w-full sm:w-full lg:w-80">
                   <div className="relative group">
                     <div className="absolute inset-0 bg-gradient-to-br from-lime-400 to-lime-600 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                     <img
@@ -61,75 +62,73 @@ export default function DoctorDetailsPage() {
                   </div>
                 </div>
 
-                <div className="flex-1 space-y-2">
+                <div className="flex-1 space-y-6">
                   {/* Doctor Name */}
                   <div>
                     <h2 className="text-3xl font-bold mb-2 text-gray-900">{doctor.doctor_name}</h2>
-                    <div className="h-0.5 w-16 bg-lime-500 rounded-full"></div>
+
                   </div>
 
                   {/* Experience & Location */}
-                 
-                    
-                      <span className="text-2xl">📚</span>
-                      <span className="text-gray-700 font-medium">6 Years Of Experience</span>
-                   
 
-                
-                      <span className="text-2xl">📍</span>
-                      <span className="text-gray-700 font-medium">{doctor.address}, {doctor.city}</span>
-                    
-                  
+
+                  <span className="text-2xl">📚</span>
+                  <span className="text-gray-700 font-medium">6 Years Of Experience</span>
+
+
+
+                  <span className="text-2xl">📍</span>
+                  <span className="text-gray-700 font-medium">{doctor.address}, {doctor.city}</span>
+
+
 
                   {/* Specialty Tag */}
                   <div>
-                    <span className="inline-block bg-gradient-to-r from-lime-100 to-lime-200 text-lime-700 text-sm px-5 py-2.5 m-1.5 rounded-full font-semibold shadow-sm">
+                    <span className="inline-block bg-gradient-to-r from-lime-100 to-lime-200 text-lime-700 text-sm px-5 py-2 m-1.5 rounded-full font-semibold shadow-sm">
                       {doctor.specialty}
                     </span>
                   </div>
 
-                  {/* Book Appointment Button */}
 
-                  
-                  
 
                   {/* About Section */}
-                
-                    <h2 className="text-2xl font-bold mb-1 text-gray-900">About</h2>
-                    <p className="text-gray-700 leading-relaxed">
-                      Specializing in {doctor.specialty}. {doctor.clinic_name && `Currently practicing at ${doctor.clinic_name}.`}
-                      {doctor.available_days && ` Available ${doctor.available_days}.`}
-                    </p>
-                 
+
+                  <h2 className="text-2xl font-bold mb-1 text-gray-900">About</h2>
+                  <p className="text-gray-700 leading-relaxed">
+                    Specializing in {doctor.specialty}. {doctor.clinic_name && `Currently practicing at ${doctor.clinic_name}.`}
+                    {doctor.available_days && ` Available ${doctor.available_days}.`}
+                  </p>
+
 
                   {/* Additional Info */}
-                  
-                   
-                      <p className="text-sm text-gray-500 mb-1">Clinic</p>
-                      <p className="text-gray-900 font-semibold">{doctor.clinic_name || "Private Practice"}</p>
-                    
-                   
-                      <p className="text-sm text-gray-500 mb-1">Phone</p>
-                      <p className="text-gray-900 font-semibold">{doctor.phone}</p>
-                    
-                   
-                      <p className="text-sm text-gray-500 mb-1">Email</p>
-                      <p className="text-gray-900 font-semibold break-all">{doctor.email}</p>
-                    
-                    {doctor.rating && (
-                      <div>
-                     
-                        <p className="text-sm text-gray-500 mb-1">Rating</p>
-                        <p className="text-gray-900 font-semibold">⭐ {doctor.rating}/5</p>
-                     </div>
-                    )}
-                
+
+
+                  <p className="text-sm text-lime-600 font-semibold mb-1">Clinic</p>
+                  <p className="text-gray-900 font-semibold">{doctor.clinic_name || "Private Practice"}</p>
+
+
+                  <p className="text-sm text-lime-600 font-semibold mb-1">Phone</p>
+                  <p className="text-gray-900 font-semibold">{doctor.phone}</p>
+
+
+                  <p className="text-sm text-lime-600 font-semibold mb-1">Email</p>
+                  <p className="text-gray-900 font-semibold break-all">{doctor.email}</p>
+
+                  {doctor.rating && (
+                    <div>
+                      <p className="text-sm text-lime-600 font-semibold mb-1">Rating</p>
+                      <p className="text-gray-900 font-semibold">⭐ {doctor.rating}/5</p>
+                    </div>
+                  )}
+
+
+                  {/* Book Appointment Button */}
                   <div className="pt-2">
                     <BookAppointment doctorId={doctor.id} />
                   </div>
                 </div>
               </div>
-           
+            </div>
           </div>
 
           {/* Suggestions Sidebar */}

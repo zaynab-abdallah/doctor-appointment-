@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Header from "../components/_components/Header"
-import Footer from "../components/_components/Footer"
-import {Toaster} from "../components/ui/toaster"
+import Header from "../components/_components/Header";
+import Footer from "../components/_components/Footer";
+import { Toaster } from "../components/ui/toaster";
+
 const outfit = Outfit({
-  
-  subsets: ["latin"]
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
@@ -28,17 +28,16 @@ export default function RootLayout({
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed"
+          backgroundAttachment: "fixed",
         }}
       >
-        {/* Overlay for better readability */}
-        <div className="fixed inset-0 bg-white/45 backdrop-blur-[2px] -z-10"></div>
+        {/* Overlay */}
+        <div className="fixed inset-0 bg-white/45 backdrop-blur-[2px] -z-10" />
 
-        
-        <div className=" relative z-10">
-          <Header/>
+        <div className="relative z-10">
+          <Header />
           {children}
-          <Footer/>
+          <Footer />
           <Toaster />
         </div>
       </body>

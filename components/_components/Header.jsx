@@ -79,7 +79,7 @@ const Menu =[
   };
 
   return (
-    <div className='flex items-center mb-10 justify-between p-3 shadow-sm relative'>
+    <div className='flex  items-center mb-10 justify-between p-3 shadow-sm '>
     <div className='flex items-center gap-10' >
         {/* Hamburger Menu Button - Mobile Only */}
         <button

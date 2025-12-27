@@ -49,7 +49,7 @@ import {
                     <input
                       type="email"
                       placeholder="john@rhcp.com"
-                      className="w-80 bg-white border-none px-2 py-2 text-sm focus:outline-none"
+                      className="w-71 bg-white border-none px-2 py-2 text-sm focus:outline-none"
                     />
   
                   </div>
