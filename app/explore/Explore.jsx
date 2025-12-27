@@ -32,7 +32,7 @@ export default function Explore() {
         <input
           type="text"
           placeholder="Search by name or specialty"
-          className="w-full max-w-md p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-lime-500"
+          className="w-full max-w-md p-3 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-lime-500"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />

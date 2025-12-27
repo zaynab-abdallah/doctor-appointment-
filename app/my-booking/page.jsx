@@ -4,11 +4,13 @@ import React, { useState, useEffect } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import doctors from "@/data/doctors.json";
 
 export default function MyBookingPage() {
   const { user } = useKindeBrowserClient();
   const router = useRouter();
+  const { toast } = useToast();
   const [appointments, setAppointments] = useState([]);
   const [filter, setFilter] = useState("upcoming"); // "upcoming" or "past"
 
@@ -49,11 +51,23 @@ export default function MyBookingPage() {
   
 
   const handleCancelAppointment = (appointmentId) => {
-    if (confirm("Are you sure you want to cancel this appointment?")) {
-      const updatedAppointments = appointments.filter((apt) => apt.id !== appointmentId);
-      setAppointments(updatedAppointments);
-      localStorage.setItem(`appointments_${user.id}`, JSON.stringify(updatedAppointments));
-    }
+    // Find the appointment to get details for the message
+    const appointmentToDelete = appointments.find((apt) => apt.id === appointmentId);
+    const doctor = appointmentToDelete ? doctors.find((doc) => doc.id === appointmentToDelete.doctorId) : null;
+    
+    // Remove the appointment
+    const updatedAppointments = appointments.filter((apt) => apt.id !== appointmentId);
+    setAppointments(updatedAppointments);
+    localStorage.setItem(`appointments_${user.id}`, JSON.stringify(updatedAppointments));
+    
+    // Show success toast message
+    toast({
+      title: "🗑️ Appointment Deleted",
+      description: doctor 
+        ? `Your appointment with ${doctor.doctor_name} has been wiped out.`
+        : "This appointment choice was wiped out.",
+      duration: 3000,
+    });
   };
 
   return (
@@ -85,7 +99,7 @@ export default function MyBookingPage() {
       </div>
 
       {filteredAppointments.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-lg p-12 text-center max-w-2xl w-full">
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-lg p-12 text-center max-w-2xl w-full">
           <p className="text-gray-500 text-lg mb-6">
             {appointments.length === 0
               ? "You don't have any appointments yet."
@@ -159,7 +173,12 @@ export default function MyBookingPage() {
 
                   {filter === "upcoming" && (
                     <Button
-                      onClick={() => handleCancelAppointment(appointment.id)}
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleCancelAppointment(appointment.id);
+                      }}
                       variant="outline"
                       className="w-full mt-4 border-red-300 text-red-600 hover:bg-red-50"
                     >

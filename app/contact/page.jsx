@@ -19,11 +19,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 mb-20 flex justify-center items-center min-h-[60vh]">
-      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg">
+    <div className="container flex flex-col gap-4 mx-auto px-4 py-8 mb-20 justify-center items-center min-h-[60vh]">
+<div>
+  
         <h1 className="text-3xl font-bold mb-6 text-center">
           <span className="text-lime-600">Contact</span> Us
         </h1>
+</div>
+      <div className="bg-white/1 backdrop-blur-sm rounded-xl shadow-xl p-8 w-full ">
 
         {submitted && (
           <div className="bg-lime-100 text-lime-800 p-4 rounded mb-4 text-center">
@@ -35,7 +38,7 @@ export default function ContactPage() {
           <input
             type="text"
             placeholder="Your Name"
-            className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-lime-500"
+            className="w-full bg-white p-3 border rounded focus:outline-none focus:ring-2 focus:ring-lime-500"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -43,14 +46,14 @@ export default function ContactPage() {
           <input
             type="email"
             placeholder="Your Email"
-            className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-lime-500"
+            className="w-full bg-white  p-3 border rounded focus:outline-none focus:ring-2 focus:ring-lime-500"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
           <textarea
             placeholder="Your Message"
-            className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-lime-500"
+            className="w-full bg-white p-3 border rounded focus:outline-none focus:ring-2 focus:ring-lime-500"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             rows={5}

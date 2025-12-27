@@ -1,49 +1,53 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
-export default function LoginPage() {
-  const router = useRouter();
-  const { user } = useKindeBrowserClient();
+function LoginDialog({ isOpen, onOpenChange }) {
   const [isRegisterMode, setIsRegisterMode] = useState(false);
 
-  // Redirect if already logged in
-  useEffect(() => {
-    if (user) {
-      router.push('/');
-    }
-  }, [user, router]);
-
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 sm:p-10 border border-lime-100">
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <Image
-            src="/assets/img/logo.png"
-            alt="Appointment App Logo"
-            width={120}
-            height={120}
-            className="rounded-lg"
-          />
-        </div>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+      <DialogContent className="w-[95vw] max-w-md mx-auto p-6 sm:p-8">
+        <DialogHeader className="text-center mb-6">
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <Image
+              src="/assets/img/logo.png"
+              alt="Appointment App Logo"
+              width={100}
+              height={100}
+              className="rounded-lg"
+            />
+          </div>
+          
+          <DialogTitle className="text-2xl sm:text-3xl font-bold mb-2">
+            {isRegisterMode ? (
+              <>
+                Welcome to <span className="text-lime-600">Doctor Appointment</span>
+              </>
+            ) : (
+              <>
+                Welcome to <span className="text-lime-600">Doctor Appointment</span>
+              </>
+            )}
+          </DialogTitle>
+          <DialogDescription className="text-base">
+            {isRegisterMode 
+              ? "Create an account to book your appointment" 
+              : "Sign in to book your appointment"}
+          </DialogDescription>
+        </DialogHeader>
 
-        {/* Title */}
-        <h1 className="text-3xl font-bold text-center mb-2">
-          Welcome to <span className="text-lime-600">Doctor Appointment</span>
-        </h1>
-        <p className="text-gray-500 text-center mb-8">
-          {isRegisterMode 
-            ? "Create an account to book your appointment" 
-            : "Sign in to book your appointment"}
-        </p>
-
-        {/* Login/Register Button */}
         <div className="space-y-4">
           {isRegisterMode ? (
             <>
@@ -52,7 +56,7 @@ export default function LoginPage() {
                   Sign Up
                 </Button>
               </RegisterLink>
-              <p className="text-center text-gray-600">
+              <p className="text-center text-gray-600 text-sm">
                 Already have an account?{" "}
                 <button
                   onClick={() => setIsRegisterMode(false)}
@@ -69,7 +73,7 @@ export default function LoginPage() {
                   Sign In
                 </Button>
               </LoginLink>
-              <p className="text-center text-gray-600">
+              <p className="text-center text-gray-600 text-sm">
                 Don't have an account?{" "}
                 <button
                   onClick={() => setIsRegisterMode(true)}
@@ -81,7 +85,10 @@ export default function LoginPage() {
             </>
           )}
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }
+
+export default LoginDialog;
+

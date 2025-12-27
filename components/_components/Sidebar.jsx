@@ -33,7 +33,7 @@ export default function Sidebar({ isOpen, onClose }) {
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-50
         w-64 p-6 border-r border-lime-200 min-h-screen
-        bg-white
+        bg-white/1
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>

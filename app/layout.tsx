@@ -22,15 +22,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${outfit.className}  antialiased`}
+        className={`${outfit.className} antialiased relative min-h-screen`}
+        style={{
+          backgroundImage: "url('/assets/img/hero.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed"
+        }}
       >
-        <div className="md:px-20">
+        {/* Overlay for better readability */}
+        <div className="fixed inset-0 bg-white/45 backdrop-blur-[2px] -z-10"></div>
+
+        
+        <div className=" relative z-10">
           <Header/>
           {children}
           <Footer/>
           <Toaster />
-          </div>
-        </body>
-      </html>
+        </div>
+      </body>
+    </html>
   );
 }

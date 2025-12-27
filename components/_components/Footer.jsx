@@ -8,8 +8,9 @@ import {
   
   export default function Footer() {
     return (
-      <footer className="bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <footer className="relative bg-white/40 backdrop-blur-md">
+
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 ">
           {/* Top */}
           <div className="lg:flex lg:items-start lg:gap-8">
             {/* Logo */}
@@ -48,7 +49,7 @@ import {
                     <input
                       type="email"
                       placeholder="john@rhcp.com"
-                      className="w-80 border-none px-2 py-2 text-sm focus:outline-none"
+                      className="w-80 bg-white border-none px-2 py-2 text-sm focus:outline-none"
                     />
   
                   </div>

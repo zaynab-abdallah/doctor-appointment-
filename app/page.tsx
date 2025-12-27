@@ -9,9 +9,11 @@ import CategorySearch from "../components/_components/CategorySearch"
 
 export default function Home() {
   return (
-    <div >
+    <div className="min-h-screen">
       <Hero/>
-      <CategorySearch/>
+      <div className="container mx-auto px-4">
+        <CategorySearch/>
+      </div>
     </div>
   );
 }

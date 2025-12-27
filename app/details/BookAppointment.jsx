@@ -19,11 +19,20 @@ function BookAppointment({ doctorId }) {
   const [date, setDate] = useState(new Date())
   const [timeSlot, setTimeSlot] = useState([])
   const [selectedTime, setSelectedTime] = useState(null)
+  const [isOpen, setIsOpen] = useState(false)
   const { toast } = useToast()
 
   useEffect(() => {
     getTime()
   }, [])
+
+  // Reset form when dialog closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedTime(null)
+      setDate(new Date())
+    }
+  }, [isOpen])
 
 
   const pastDay=(day)=>{
@@ -96,8 +105,11 @@ return day<new Date()
         title: "✅ Appointment booked",
         description: `Your appointment is on ${date.toDateString()} at ${selectedTime}`,
       })
-  
+
+      // Reset form and close dialog
       setSelectedTime(null)
+      setDate(new Date())
+      setIsOpen(false)
     } catch (error) {
       toast({
         title: "❌ Error",
@@ -110,7 +122,7 @@ return day<new Date()
 
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="w-full bg-lime-600 hover:bg-lime-700 text-white py-4 sm:py-6 text-base sm:text-lg mb-6">
           Book Appointment

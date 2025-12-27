@@ -13,38 +13,48 @@ function DoctorCard({ doctor }) {
 
   return (
     <div 
-      className="border rounded-xl p-5 shadow-sm hover:shadow-md transition w-full max-w-sm mb-5 cursor-pointer"
+      className="border-2 border-gray-100 rounded-2xl p-2 shadow-md hover:shadow-2xl transition-all duration-300 w-full max-w-sm mb-5 cursor-pointer bg-white hover:border-lime-300 group overflow-hidden"
       onClick={handleCardClick}
     >
-      {/* Image */}
-      <img
-        src={doctor.image}
-        alt={doctor.doctor_name}
-        className="w-full h-60 object-cover rounded-lg mb-4"
-      />
+      {/* Image with overlay effect */}
+      <div className="relative mb-5 overflow-hidden rounded-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-lime-400 to-lime-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 z-10"></div>
+        <img
+          src={doctor.image}
+          alt={doctor.doctor_name}
+          className="w-full h-60 object-cover rounded-xl group-hover:scale-110 transition-transform duration-300"
+        />
+      </div>
 
       {/* Specialty */}
-      <span className="inline-block bg-lime-100 text-lime-700 text-sm px-3 py-1 rounded-full mb-3">
-        {doctor.specialty}
-      </span>
+      <div className="mb-4">
+        <span className="inline-block bg-gradient-to-r from-lime-100 to-lime-200 text-lime-700 text-sm px-4 py-1.5 rounded-full font-semibold shadow-sm">
+          {doctor.specialty}
+        </span>
+      </div>
 
-      {/* Info */}
-      <p className="text-sm mb-1">
-        <span className="font-semibold text-lime-700">Name:</span> {doctor.doctor_name}
-      </p>
+      {/* Info with better spacing */}
+      <div className="space-y-3 mb-6">
+        <div className="flex items-start gap-2">
+          <span className="text-lime-600 font-bold min-w-[60px]">Name:</span>
+          <p className="text-gray-900 font-semibold flex-1">{doctor.doctor_name}</p>
+        </div>
 
-      <p className="text-sm mb-1">
-        <span className="font-semibold text-lime-700">Address:</span> {doctor.address}
-      </p>
+        <div className="flex items-start gap-2">
+          <span className="text-lime-600 font-bold min-w-[60px]">📍</span>
+          <p className="text-gray-700 text-sm flex-1 line-clamp-2">{doctor.address}</p>
+        </div>
 
-      <p className="text-sm mb-4">
-        <span className="font-bold text-lime-700">Phone:</span> {doctor.phone}
-      </p>
+        <div className="flex items-start gap-2">
+          <span className="text-lime-600 font-bold min-w-[60px]">📞</span>
+          <p className="text-gray-700 text-sm flex-1">{doctor.phone}</p>
+        </div>
+      </div>
 
       {/* Button */}
       <Button 
         variant="outline" 
-        className="w-full bg-lime-600 hover:bg-lime-700 cursor-pointer hover:scale-105 transition-all text-white"
+        className="w-full bg-gradient-to-r from-lime-600 to-lime-700 hover:from-lime-700 hover:to-lime-800 cursor-pointer hover:scale-105 transition-all duration-300 text-white font-semibold py-6 shadow-lg hover:shadow-xl"
         onClick={(e) => {
           e.stopPropagation();
           router.push(`/details/${doctor.id}`);

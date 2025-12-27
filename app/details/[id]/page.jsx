@@ -35,117 +35,148 @@ export default function DoctorDetailsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 mb-20">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Content - Doctor Details */}
-        <div className="lg:col-span-2">
-          <h1 className="text-3xl font-bold mb-6">Details</h1>
+    <div className="min-h-screen bg-gradient-to-br from-white/50 via-white/20 to-white/50 backdrop-blur-sm">
 
-          <div className="flex flex-col sm:flex-row gap-10 bg-white rounded-xl shadow-xl p-6 items-center justify-center">
-
-            {/* Doctor Image */}
-            <div className="mb-6 flex  ">
-              <img
-                src={doctor.image}
-                alt={doctor.doctor_name}
-                className="w-full aspect-[4/3] object-cover rounded-lg"
-              />
-
+      <div className="container mx-auto px-4 py-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Content - Doctor Details */}
+          <div className="lg:col-span-2">
+            <div className="mb-8">
+              <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-lime-600 to-lime-800 bg-clip-text text-transparent">
+                Doctor Details
+              </h1>
+              <div className="h-1 w-20 bg-gradient-to-r from-lime-500 to-lime-700 rounded-full"></div>
             </div>
-            <div className="doctor details">
 
-              {/* Doctor Name */}
-              <h2 className="text-2xl font-bold mb-4">{doctor.doctor_name}</h2>
+          <div className="flex gap-8 p-8">
+                {/* Doctor Image */}
+                <div className="flex-shrink-0 sm:w-80">
+                  <div className="relative group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-lime-400 to-lime-600 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    <img
+                      src={doctor.image}
+                      alt={doctor.doctor_name}
+                      className="w-full h-100 aspect-[4/3] object-cover rounded-xl shadow-lg"
+                    />
+                  </div>
+                </div>
 
-              {/* Experience */}
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-lg">📚</span>
-                <span className="text-gray-700">6 Years Of Experience</span>
-              </div>
+                <div className="flex-1 space-y-2">
+                  {/* Doctor Name */}
+                  <div>
+                    <h2 className="text-3xl font-bold mb-2 text-gray-900">{doctor.doctor_name}</h2>
+                    <div className="h-0.5 w-16 bg-lime-500 rounded-full"></div>
+                  </div>
 
-              {/* Location */}
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-lg">📍</span>
-                <span className="text-gray-700">{doctor.address}, {doctor.city}</span>
-              </div>
+                  {/* Experience & Location */}
+                 
+                    
+                      <span className="text-2xl">📚</span>
+                      <span className="text-gray-700 font-medium">6 Years Of Experience</span>
+                   
 
-              {/* Specialty Tag */}
-              <div className="mb-6">
-                <span className="inline-block bg-lime-100 text-lime-700 text-sm px-4 py-2 rounded-full font-medium">
-                  {doctor.specialty}
-                </span>
-              </div>
+                
+                      <span className="text-2xl">📍</span>
+                      <span className="text-gray-700 font-medium">{doctor.address}, {doctor.city}</span>
+                    
+                  
 
-              {/* Book Appointment Button */}
-
-              <BookAppointment doctorId={doctor.id} />
-
-              {/* About Section */}
-              <div>
-                <h2 className="text-2xl font-bold mb-3">About</h2>
-                <p className="text-gray-700">
-                  Specializing in {doctor.specialty}. {doctor.clinic_name && `Currently practicing at ${doctor.clinic_name}.`}
-                  {doctor.available_days && ` Available ${doctor.available_days}.`}
-                </p>
-              </div>
-
-              {/* Additional Info */}
-              <div className="mt-6 space-y-2">
-                <p className="text-gray-700">
-                  <span className=" text-lime-700 font-bold">Clinic:</span> {doctor.clinic_name || "Private Practice"}
-                </p>
-                <p className="text-gray-700">
-                  <span className="text-lime-700 font-bold">Phone:</span> {doctor.phone}
-                </p>
-                <p className="text-gray-700">
-                  <span className="text-lime-700 font-bold">Email:</span> {doctor.email}
-                </p>
-                {doctor.rating && (
-                  <p className="text-gray-700">
-                    <span className="text-lime-700 font-bold">Rating:</span> ⭐ {doctor.rating}/5
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Suggestions Sidebar */}
-        <div className="lg:col-span-1">
-          <h2 className="text-2xl font-bold mb-6">Suggestions</h2>
-          <div className="space-y-4 max-h-[800px] overflow-y-auto pr-2">
-            {suggestions.map((suggestedDoctor) => (
-              <div
-                key={suggestedDoctor.id}
-                onClick={() => router.push(`/details/${suggestedDoctor.id}`)}
-                className="bg-white rounded-lg shadow-md p-4 cursor-pointer hover:shadow-lg transition-all border border-gray-100"
-              >
-                <div className="flex gap-4">
-                  {/* Doctor Image */}
-                  <img
-                    src={suggestedDoctor.image}
-                    alt={suggestedDoctor.doctor_name}
-                    className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
-                  />
-
-                  {/* Doctor Info */}
-                  <div className="flex-1 min-w-0">
-                    <span className="inline-block bg-lime-100 text-lime-700 text-xs px-2 py-1 rounded-full mb-2">
-                      {suggestedDoctor.specialty}
+                  {/* Specialty Tag */}
+                  <div>
+                    <span className="inline-block bg-gradient-to-r from-lime-100 to-lime-200 text-lime-700 text-sm px-5 py-2.5 m-1.5 rounded-full font-semibold shadow-sm">
+                      {doctor.specialty}
                     </span>
-                    <h3 className="font-semibold text-gray-900 mb-1 truncate">
-                      {suggestedDoctor.doctor_name}
-                    </h3>
-                    <p className="text-sm text-gray-600">5 years Experience</p>
+                  </div>
+
+                  {/* Book Appointment Button */}
+
+                  
+                  
+
+                  {/* About Section */}
+                
+                    <h2 className="text-2xl font-bold mb-1 text-gray-900">About</h2>
+                    <p className="text-gray-700 leading-relaxed">
+                      Specializing in {doctor.specialty}. {doctor.clinic_name && `Currently practicing at ${doctor.clinic_name}.`}
+                      {doctor.available_days && ` Available ${doctor.available_days}.`}
+                    </p>
+                 
+
+                  {/* Additional Info */}
+                  
+                   
+                      <p className="text-sm text-gray-500 mb-1">Clinic</p>
+                      <p className="text-gray-900 font-semibold">{doctor.clinic_name || "Private Practice"}</p>
+                    
+                   
+                      <p className="text-sm text-gray-500 mb-1">Phone</p>
+                      <p className="text-gray-900 font-semibold">{doctor.phone}</p>
+                    
+                   
+                      <p className="text-sm text-gray-500 mb-1">Email</p>
+                      <p className="text-gray-900 font-semibold break-all">{doctor.email}</p>
+                    
+                    {doctor.rating && (
+                      <div>
+                     
+                        <p className="text-sm text-gray-500 mb-1">Rating</p>
+                        <p className="text-gray-900 font-semibold">⭐ {doctor.rating}/5</p>
+                     </div>
+                    )}
+                
+                  <div className="pt-2">
+                    <BookAppointment doctorId={doctor.id} />
                   </div>
                 </div>
               </div>
-            ))}
-            {suggestions.length === 0 && (
-              <p className="text-gray-500 text-center py-8">
-                No other doctors in this specialty
-              </p>
-            )}
+           
+          </div>
+
+          {/* Suggestions Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-8">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold mb-2 text-gray-900">Similar Doctors</h2>
+                <div className="h-1 w-16 bg-gradient-to-r from-lime-500 to-lime-700 rounded-full"></div>
+              </div>
+              <div className="space-y-4 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
+                {suggestions.map((suggestedDoctor) => (
+                  <div
+                    key={suggestedDoctor.id}
+                    onClick={() => router.push(`/details/${suggestedDoctor.id}`)}
+                    className="bg-white rounded-xl shadow-md p-5 cursor-pointer hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-lime-300 hover:scale-[1.02] group"
+                  >
+                    <div className="flex gap-4">
+                      {/* Doctor Image */}
+                      <div className="relative flex-shrink-0">
+                        <div className="absolute inset-0 bg-gradient-to-br from-lime-400 to-lime-600 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        <img
+                          src={suggestedDoctor.image}
+                          alt={suggestedDoctor.doctor_name}
+                          className="w-20 h-20 object-cover rounded-lg shadow-md"
+                        />
+                      </div>
+
+                      {/* Doctor Info */}
+                      <div className="flex-1 min-w-0">
+                        <span className="inline-block bg-gradient-to-r from-lime-100 to-lime-200 text-lime-700 text-xs px-2.5 py-1 rounded-full mb-2 font-medium">
+                          {suggestedDoctor.specialty}
+                        </span>
+                        <h3 className="font-semibold text-gray-900 mb-1 truncate group-hover:text-lime-700 transition-colors">
+                          {suggestedDoctor.doctor_name}
+                        </h3>
+                        <p className="text-sm text-gray-600">5 years Experience</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {suggestions.length === 0 && (
+                  <div className="bg-white rounded-xl shadow-md p-8 text-center border border-gray-100">
+                    <p className="text-gray-500">No other doctors in this specialty</p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
