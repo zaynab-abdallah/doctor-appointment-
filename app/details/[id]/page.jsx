@@ -35,7 +35,7 @@ export default function DoctorDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white/50 via-white/20 to-white/50 backdrop-blur-sm">
+    <div className="min-h-screen bg-gradient-to-br bg-white/1 backdrop-blur-sm">
 
       <div className="container mx-auto px-4 py-8 mb-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
